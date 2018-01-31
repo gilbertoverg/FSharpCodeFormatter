@@ -10,26 +10,8 @@ module FSharpCodeFormatter.Formatter
 
 open Lib
 
-// Genero una lista di caratteri dato il codice ascii dell'inizio (compreso) e della fine (compreso)
-let rec chars inizio fine =
-    if inizio <= fine then (char inizio) :: chars (inizio + 1) fine
-    else []
-
-// Versione avanzata di trim_line: rimuovo tutti i caratteri ascii dallo 0 al 32 (quindi anche lo spazio)
-//     0 nul    1 soh    2 stx    3 etx    4 eot    5 enq    6 ack    7 bel
-//     8 bs     9 ht    10 nl    11 vt    12 np    13 cr    14 so    15 si
-//    16 dle   17 dc1   18 dc2   19 dc3   20 dc4   21 nak   22 syn   23 etb
-//    24 can   25 em    26 sub   27 esc   28 fs    29 gs    30 rs    31 us
-//    32 sp    33  !    34  "    35  #    36  $    37  %    38  &    39  '
-//    40  (    41  )    42  *    43  +    44  ,    45  -    46  .    47  /
-//    48  0    49  1    50  2    51  3    52  4    53  5    54  6    55  7
-//    56  8    57  9    58  :    59  ;    60  <    61  =    62  >    63  ?
-//    64  @    65  A    66  B    67  C    68  D    69  E    70  F    71  G
-//    ....
-let rifila_linea (s : string) = s.Trim (chars 0 32 |> List.toArray)
-
-// Versione avanzata di split_lines: splitta dividendo solo con \n, gli eventuali \r sono rimossi da rifila_linea
-let dividi_linee (s : string) = s.Split ([|'\n'|], System.StringSplitOptions.None) |> Array.map rifila_linea |> List.ofArray
+// Versione avanzata di split_lines: splitta dividendo solo con \n, gli eventuali \r verranno rimossi da tokenize
+let dividi_linee (s : string) = s.Split ([|'\n'|], System.StringSplitOptions.None) |> List.ofArray
 
 // Converte una stringa in una lista di caratteri
 let esplodi (s : string) =
@@ -209,7 +191,8 @@ let split (w : int) (s : string) =
         match linee with
         | [] -> []
         | x::xs ->
-            let linee_spezzate = spezza_tutto (tokenize x) [] // Spezzo il più possibile
+            let tokens = tokenize x // Tokenizzo
+            let linee_spezzate = spezza_tutto tokens [] // Spezzo il più possibile
             let linee_riunite = riunisci linee_spezzate maxlen // Ricompongo
             let stringhe_unite = linee_in_stringhe linee_riunite // Trasformo le liste in stringhe
             stringhe_unite @ controlla xs maxlen
@@ -220,7 +203,8 @@ let split (w : int) (s : string) =
         | x::y::xs ->
             if x <> "" || y <> "" then x :: rimuovi_doppi_vuoti (y :: xs) // Una delle due righe ha contenuto
             else rimuovi_doppi_vuoti (y :: xs)
-    let linee_spezzate = controlla (dividi_linee s) w // Spezzo le linee
+    let linee = dividi_linee s // Separo le linee
+    let linee_spezzate = controlla linee w // Adatto le linee alla massima lunghezza consentita
     rimuovi_doppi_vuoti linee_spezzate // Rimuovo linee vuote di troppo
 
 // STRUTTURA DATI PER LO STORICO:
