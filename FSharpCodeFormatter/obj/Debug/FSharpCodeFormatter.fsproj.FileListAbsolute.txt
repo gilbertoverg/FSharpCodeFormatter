@@ -1,9 +1,0 @@
-/Users/gilberto/Documents/UNIVERSITA'/2017-2018/Programmazione/FSharpCodeFormatter/obj/Debug/FSharpCodeFormatter.fsprojResolveAssemblyReference.cache
-/Users/gilberto/Documents/UNIVERSITA'/2017-2018/Programmazione/FSharpCodeFormatter/obj/Debug/FSharpCodeFormatter.fsproj.CoreCompileInputs.cache
-/Users/gilberto/Documents/UNIVERSITA'/2017-2018/Programmazione/FSharpCodeFormatter/bin/Debug/FSharpCodeFormatter.exe.config
-/Users/gilberto/Documents/UNIVERSITA'/2017-2018/Programmazione/FSharpCodeFormatter/bin/Debug/FSharpCodeFormatter.XML
-/Users/gilberto/Documents/UNIVERSITA'/2017-2018/Programmazione/FSharpCodeFormatter/bin/Debug/FSharpCodeFormatter.exe
-/Users/gilberto/Documents/UNIVERSITA'/2017-2018/Programmazione/FSharpCodeFormatter/bin/Debug/FSharpCodeFormatter.pdb
-/Users/gilberto/Documents/UNIVERSITA'/2017-2018/Programmazione/FSharpCodeFormatter/bin/Debug/System.ValueTuple.dll
-/Users/gilberto/Documents/UNIVERSITA'/2017-2018/Programmazione/FSharpCodeFormatter/obj/Debug/FSharpCodeFormatter.exe
-/Users/gilberto/Documents/UNIVERSITA'/2017-2018/Programmazione/FSharpCodeFormatter/obj/Debug/FSharpCodeFormatter.pdb
